@@ -8,13 +8,11 @@ const Podcast = () => {
   const [activeAudioIndex, setActiveAudioIndex] = useState(null);
 
   useEffect(() => {
-    axios.get('https://arthurfrost.qflo.co.za/php/getTimeline.php')
+    axios.get('https://arthurfrost.qflo.co.za/php/getTimeline.php') // making the call 
       .then(response => {
-        console.log('Response data:', response.data); 
         setData(response.data);
       })
-      .catch(error => {
-        console.error('Error fetching data:', error); 
+      .catch(error => { 
         setError(error.message);
       });
   }, []);
