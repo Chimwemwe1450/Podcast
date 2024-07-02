@@ -1,0 +1,160 @@
+/* Timeline.css */
+
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+.timeline-container {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.timeline-header {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 2.5rem;
+  color: #333;
+}
+
+.body-section,
+.timeline-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.body-item,
+.timeline-item {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 16px;
+  width: 80%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.body-background {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 16px auto; /* Centering the element */
+}
+
+
+.timeline-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px;
+}
+
+.timeline-media {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.timeline-icon {
+  width: 50px;
+  height: 50px;
+  margin-right: 16px;
+}
+
+.timeline-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.timeline-content {
+  text-align: center;
+}
+
+.timeline-content h2 {
+  margin: 16px 0;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.timeline-content p {
+  font-size: 1rem;
+  color: #666;
+}
+
+.timeline-content .audio-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 16px;
+  width: 300px; /* Fixed width for audio container */
+  max-width: 100%;
+}
+
+.timeline-content .audio-container audio {
+  width: 100%; /* Ensures responsiveness */
+  margin-top: 10px; /* Adjusted margin top */
+}
+
+.timeline-content .audio-button {
+  margin-top: 10px;
+}
+
+/* Media Queries for Mobile Responsiveness */
+@media (max-width: 768px) {
+  .timeline-container {
+    padding: 10px;
+  }
+
+  .body-item,
+  .timeline-item {
+    width: 100%;
+    padding: 12px;
+    margin: 12px 0;
+  }
+
+  .body-background {
+    width: 100%;
+  }
+
+  .timeline-content h2 {
+    font-size: 1.2rem;
+  }
+
+  .timeline-content p {
+    font-size: 0.9rem;
+  }
+
+  .timeline-content .audio-container {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .timeline-header {
+    font-size: 2rem;
+  }
+
+  .body-item,
+  .timeline-item {
+    padding: 10px;
+    margin: 10px 0;
+  }
+
+  .timeline-content h2 {
+    font-size: 1rem;
+  }
+
+  .timeline-content p {
+    font-size: 0.8rem;
+  }
+
+  .timeline-content .audio-button {
+    font-size: 0.9rem;
+  }
+}
