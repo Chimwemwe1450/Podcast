@@ -8,11 +8,13 @@ const Podcast = () => {
   const [activeAudioIndex, setActiveAudioIndex] = useState(null);
 
   useEffect(() => {
-    axios.get('https://arthurfrost.qflo.co.za/php/getTimeline.php') // making the call 
+    axios.get('https://arthurfrost.qflo.co.za/php/getTimeline.php')
       .then(response => {
+        console.log('Response data:', response.data); 
         setData(response.data);
       })
-      .catch(error => { 
+      .catch(error => {
+        console.error('Error fetching data:', error); 
         setError(error.message);
       });
   }, []);
@@ -25,6 +27,11 @@ const Podcast = () => {
     }
   };
 
+  const handleImageError = (e, item) => {
+    console.error('Image error:', e, item);
+    e.target.src = 'https://arthurfrost.qflo.co.za/Images/GeneralTeachingsAppThumb.jpg'; // target the spefic image 
+  };
+
   if (error) {
     return <div>Error: {error}</div>;
   }
@@ -32,11 +39,15 @@ const Podcast = () => {
   return (
     <div className="timeline-container">
       <div className="body-section">
-        <h1>Podcast</h1>
         {data.Body.map((item, index) => (
           <div key={index} className="body-item">
-            <img className="body-background" src={`https://arthurfrost.qflo.co.za/${item.Background}`} alt="Background" />
-            <div dangerouslySetInnerHTML={{ __html: item.About }} />
+            <img
+              className="body-background"
+              src={`https://arthurfrost.qflo.co.za/${item.Background}`}
+              alt="Background"
+              onError={(e) => handleImageError(e, item)}
+            />
+            <div className="body-content" dangerouslySetInnerHTML={{ __html: item.About }} />
             <script>{item.JS}</script>
           </div>
         ))}
@@ -45,8 +56,18 @@ const Podcast = () => {
         {data.Timeline.map((item, index) => (
           <div key={index} className="timeline-item">
             <div className="timeline-media">
-              <img className="timeline-icon" src={`https://arthurfrost.qflo.co.za/${item.Icon}`} alt={`${item.Title} Icon`} />
-              <img className="timeline-image" src={`https://arthurfrost.qflo.co.za/${item.Image}`} alt={item.Title} />
+              <img
+                className="timeline-icon"
+                src={`https://arthurfrost.qflo.co.za/${item.Icon}`}
+                alt={`${item.Title} Icon`}
+                onError={(e) => handleImageError(e, item)}
+              />
+              <img
+                className="timeline-image"
+                src={`https://arthurfrost.qflo.co.za/${item.Image}`}
+                alt={item.Title}
+                onError={(e) => handleImageError(e, item)}
+              />
             </div>
             <div className="timeline-content">
               <h2>Title: {item.Title}</h2>
@@ -60,10 +81,12 @@ const Podcast = () => {
                     {activeAudioIndex === index ? 'Hide Audio' : 'Play Audio'}
                   </button>
                   {activeAudioIndex === index && (
-                    <audio controls autoPlay onError={(e) => console.error('Audio error:', e)}>
-                      <source src={`https://arthurfrost.qflo.co.za/${item.Audio}`} type="audio/mp3" />
-                      Your browser does not support the audio element.
-                    </audio>
+                    <div className="audio-container">
+                      <audio controls autoPlay onError={(e) => console.error('Audio error:', e)}>
+                        <source src={`https://arthurfrost.qflo.co.za/${item.Audio}`} type="audio/mp3" />
+                        Your browser does not support the audio element.
+                      </audio>
+                    </div>
                   )}
                 </>
               ) : (
